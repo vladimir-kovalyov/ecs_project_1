@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'This is Bbuild stage'
+                echo 'This is Build stage'
             }
         }
 
@@ -32,6 +32,9 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'This is Deploy stage'
+                sshPublisher(publishers: [sshPublisherDesc(configName: 'Web', 
+                transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'mv index.html /var/www/html/index.html', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'index.html')], 
+                usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
             }
         }
             
