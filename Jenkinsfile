@@ -39,6 +39,8 @@ pipeline {
                 sshPublisher(publishers: [sshPublisherDesc(configName: 'Web', 
                 transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'tar -xzvf build.tgz -C /var/www/html/', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'build.tgz')], 
                 usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+                // Move into /var/www/html and execute nmp install
+                sh 'cd /var/www/html/ && npm install'
                 
             }
         }
