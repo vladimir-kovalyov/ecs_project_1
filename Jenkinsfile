@@ -34,9 +34,9 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'This is Deploy stage'
-                //Now move artifact to AWS server and extract archive into /var/www/html
+                // Now move artifact to AWS server and extract archive into /var/www/html
                 sshPublisher(publishers: [sshPublisherDesc(configName: 'Web', 
-                transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'tar -xzvf build.tgz -C /var/www.html/', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'build.tgz')], 
+                transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'tar -xzvf build.tgz -C /var/www/html/', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'build.tgz')], 
                 usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
                 
             }
