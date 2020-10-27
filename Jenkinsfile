@@ -10,6 +10,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'This is Build stage' // To be removed later   
+                sh 'rm build.tgz' // Removing old archive
                 sh 'tar -czvf build.tgz *' // Archiving all files into one
                 archiveArtifacts artifacts: 'build.tgz', fingerprint: true, followSymlinks: false // Saving archive
             }
