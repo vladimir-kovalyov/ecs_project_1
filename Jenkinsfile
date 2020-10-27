@@ -39,7 +39,6 @@ pipeline {
                 sshPublisher(publishers: [sshPublisherDesc(configName: 'Web', 
                 transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'tar -xzvf build.tgz -C /var/www/html/ && cd /var/www/html/ && npm install', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'build.tgz')], 
                 usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
-                
             }
         }
             
