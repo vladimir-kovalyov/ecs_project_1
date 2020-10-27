@@ -3,7 +3,8 @@
   "description": "Simple blog web application that serves ECS content.",
   "version": "1.0.0",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "scss": "node-sass --watch assets/scss -o assets/css"
   },
   "repository": {
     "type": "git",
@@ -13,9 +14,11 @@
   "author": "Vladimir Kovalyov, Michael David Skidmore",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1",
     "bootstrap": "^4.5.3",
-    "jquery": "^1.9.1",
-    "popper.js": "^1.16.1"
+    "express": "^4.17.1",
+    "jquery": "^3.5.1",
+    "node-sass": "^4.14.1",
+    "popper.js": "^1.16.1",
+    "run-script": "^0.1.1"
   }
 }
