@@ -1,4 +1,4 @@
  https://academy-project-blogs.s3-eu-west-1.amazonaws.com/teaching_code.doc
  https://academy-project-blogs.s3-eu-west-1.amazonaws.com/IDC.md
  https://academy-project-blogs.s3-eu-west-1.amazonaws.com/milestones.txt
- 
+ https://raw.githubusercontent.com/linuxacademy/content-intro-to-python-development/master/helpers/bashrc
