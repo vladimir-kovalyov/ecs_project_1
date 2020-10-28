@@ -33,13 +33,18 @@
 
 <!-- Handlebars -->
 <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
-<script src="js/template.js"></script>
+<script src="js/handlebars-templating.js"></script>
 
 <body>
-    <div class="blog-list container-lg">
-        <script>
-            appendBlogEntryToElement("blog-list");
-        </script>
+    <div id="blog-list" class="container">
+        <div class="container-lg">
+            <h1>ECS Academy Blog</h1>
+            <div class="card-columns">
+                <script>
+                    appendBlogEntryToElementById("blog-list");
+                </script>
+            </div>
+        <div>
     </div>
 </body>
 
