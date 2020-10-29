@@ -1,11 +1,11 @@
 #!/bin/bash
 
 input=./links.txt
-o=blogfiles/
+o=../../public/blogfiles/
 
 cd $o
 
-myarr=($(awk -F':' '{ print $0 }' "../$input" | sed -ne '/.txt$/p' -e '/.doc$/p' -e '/.md$/p'))
+myarr=($(awk -F':' '{ print $0 }' "../../assets/blogs/$input" | sed -ne '/.txt$/p' -e '/.doc$/p' -e '/.md$/p'))
 
 for i in "${myarr[@]}"
 do

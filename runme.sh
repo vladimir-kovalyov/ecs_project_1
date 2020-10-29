@@ -1,3 +1,3 @@
 #!/bin/bash
 
-nohup node app.js > /dev/null 2>&1 &
+sudo node app.js
