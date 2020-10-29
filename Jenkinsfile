@@ -38,14 +38,8 @@ pipeline {
 
                 stage('Unit Test') {
                     steps {
-                        script {
+                        echo 'this is Unit Testing stage'
                         sh 'npm run test'
-                        }
-                    }
-                    post {
-                        always {
-                        junit 'output/coverage/junit/junit.xml'
-                        }
                     }
                 }
 

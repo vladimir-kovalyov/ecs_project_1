@@ -5,8 +5,7 @@
   "scripts": {
     "scss": "node-sass --watch assets/scss -o assets/css",
     "eslint": "eslint",
-    "start": "webpack",
-    "test": "jest --coverage --coverageDirectory=output/coverage/jest"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
