@@ -10,8 +10,8 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'This is Build stage' // To be removed later   
-                // sh 'rm build.tgz' // Removing old archive
-                sh 'npm install'
+                sh 'rm build.tgz' // Removing old archive
+                sh 'npm install' // Installing required modules
                 sh 'cd assets/blogs/ && mkdir -p blogfiles && ./getblogs.sh'
                 sh 'tar -czvf build.tgz *' // Archiving all files into one
                 archiveArtifacts artifacts: 'build.tgz', fingerprint: true, followSymlinks: false // Saving archive
