@@ -11,7 +11,7 @@ pipeline {
             steps {
                 echo 'This is Build stage' // To be removed later   
                 sh 'rm build.tgz' // Removing old archive
-                sh 'npm ci'
+                // sh 'npm ci'
                 sh 'cd assets/blogs/ && mkdir -p blogfiles && ./getblogs.sh'
                 sh 'tar -czvf build.tgz *' // Archiving all files into one
                 archiveArtifacts artifacts: 'build.tgz', fingerprint: true, followSymlinks: false // Saving archive
@@ -25,7 +25,7 @@ pipeline {
                         echo 'Linting...'
                         // catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                         catchError {
-                        sh 'npm run lint -- -f checkstyle -o eslint.xml'
+                        sh 'npm run eslint -- -f checkstyle -o eslint.xml'
                         }
                     }
                     post {
