@@ -19,6 +19,21 @@ pipeline {
 
         stage('Test') {
             parallel {
+                stage('Lint') {
+              steps {
+                echo 'Linting...'
+                // catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                catchError {
+                  sh 'npm run lint -- -f checkstyle -o eslint.xml'
+                }
+              }
+              post {
+                always {
+                  // Warnings Next Generation Plugin
+                  recordIssues enabledForFailure: true, tools: [esLint(pattern: 'eslint.xml')]
+                }
+              }
+
                 stage('Unit Test') {
                     steps {
                         echo 'This is Unit Test stage'
