@@ -1,0 +1,15 @@
+{{#if listExists}}
+    {{#each blogs}}
+        <div class='card'>
+            <div class='card-body'>
+                <h5 class='card-title'>{{blog-header}}</h5>
+                <p class='card-content'>{{blog-content}}</p>
+                <blockquote class='blockquote mb-0'>
+                    <footer class='blockquote-footer'>
+                        <small class='text-muted'>{{blog-author}}</small>
+                    </footer>
+                </blockquote>
+            </div>
+        </div>
+    {{/each}}
+{{/if}}

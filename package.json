@@ -4,7 +4,8 @@
   "version": "1.0.0",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "scss": "node-sass --watch assets/scss -o assets/css"
+    "scss": "node-sass --watch assets/scss -o assets/css",
+    "lint": "eslint"
   },
   "repository": {
     "type": "git",
@@ -14,11 +15,19 @@
   "author": "Vladimir Kovalyov, Michael David Skidmore",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "bootstrap": "^4.5.3",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
+    "express-handlebars": "^5.2.0",
+    "handlebars": "^4.7.6",
     "jquery": "^3.5.1",
     "node-sass": "^4.14.1",
     "popper.js": "^1.16.1",
+    "rocket-store": "^0.10.8",
     "run-script": "^0.1.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.12.1"
   }
 }

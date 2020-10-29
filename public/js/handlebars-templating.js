@@ -1,9 +1,11 @@
+// eslint-disable-next-line no-unused-vars
 function appendBlogEntryToElementById(parent, header, content, author) {
     // Use Handlebars to "compile" the HTML
-    let template = Handlebars.compile(
+    // eslint-disable-next-line no-undef
+    var template = Handlebars.compile(
         "<div class='card'>\
             <div class='card-body'>\
-                <h5 class='card-title'>\{{blog_header}}</h5>\
+                <h5 class='card-title'>{{blog_header}}</h5>\
                 <p class='card-content'>{{blog_content}}</p>\
                 <blockquote class='blockquote mb-0'>\
                     <footer class='blockquote-footer'>\
@@ -15,7 +17,7 @@ function appendBlogEntryToElementById(parent, header, content, author) {
     );
     // Then we give a JSON object with key -> values where keys correspond to
     // the {{ ... }} templating we defined above
-    let blog_elements = {
+    var blog_elements = {
         blog_header: isStringEmpty(header) ? "Foo" : header,
         blog_content: isStringEmpty(content) ? "Lorem Ipsum" : content,
         blog_author: isStringEmpty(author) ? "Bar" : author
@@ -24,14 +26,14 @@ function appendBlogEntryToElementById(parent, header, content, author) {
 }
 
 function htmlToElement(html) {
-    let template = document.createElement('template');
+    var template = document.createElement('template');
     html = html.trim();
     template.innerHTML = html;
     return template.content.firstChild;
 }
 
 function isStringEmpty(str) {
-    if (typeof str === 'undefined' || typeof str === null) {
+    if (typeof str === 'undefined') {
         return true;
     }
 
