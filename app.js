@@ -5,7 +5,7 @@ const rs = require('rocket-store');
 const bp = require('body-parser');
 
 const app = express();
-const port = 8080;
+const port = 80;
 
 //Loads the handlebars module
 const handlebars = require('express-handlebars');
