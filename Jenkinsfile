@@ -6,6 +6,10 @@ pipeline {
         timestamps()
     }
 
+    tools {
+        nodejs 'default-nodejs'
+    }
+
     stages {
         stage('Build') {
             steps {
@@ -37,9 +41,10 @@ pipeline {
                 }
 
                 stage('Unit Test') {
-                    steps {
-                        echo 'This is Unit Test stage'
+                    withEnv(["JEST_JUNIT_OUTPUT=./jest-test-results.xml"]) {
+                        sh 'npm test -- --ci --testResultsProcessor="jest-junit"'
                     }
+                    junit 'jest-test-results.xml'
                 }
 
                 stage('UI Testing') {
