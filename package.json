@@ -4,8 +4,8 @@
   "version": "1.0.0",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "scss": "node-sass --watch public/scss -o public/css",
-    "lint": "eslint"
+    "scss": "node-sass --watch assets/scss -o assets/css",
+    "eslint": "eslint"
   },
   "repository": {
     "type": "git",
@@ -28,6 +28,7 @@
     "run-script": "^0.1.1"
   },
   "devDependencies": {
-    "eslint": "^7.12.1"
+    "eslint": "^7.12.1",
+    "eslint-config-google": "^0.14.0"
   }
 }
