@@ -1,7 +1,8 @@
 const express = require('express');
 // eslint-disable-next-line no-unused-vars
-var hbs = require('express-handlebars');
+const hbs = require('express-handlebars');
 const rs = require('rocket-store');
+const bp = require('body-parser');
 
 const app = express();
 const port = 8080;
@@ -12,7 +13,7 @@ const handlebars = require('express-handlebars');
 //Sets our app to use the handlebars engine
 app.set('view engine', 'handlebars');
 
-//Sets handlebars configurations (we will go through them later on)
+//Sets handlebars configurations
 app.engine('handlebars', handlebars({
     // eslint-disable-next-line no-undef
     layoutsDir: __dirname + '/views/layouts',
@@ -21,11 +22,15 @@ app.engine('handlebars', handlebars({
 // eslint-disable-next-line no-undef
 app.use(express.static(__dirname + '/public'));
 
+app.use(bp.urlencoded({ extended: false }));
+
+// parse application/json
+app.use(bp.json());
+
 app.get('/', async (req, res) => {
     // Serves the body of the page "main.handlebars" to the container "index.handlebars"
     try {
         const blogs = await getAllBlogs();
-        console.log(JSON.stringify(blogs.result));
         res.render('main', {layout : 'index', blogs: blogs.result, listExists: true});
     } catch (err) {
         // Shouldn't happen
@@ -67,7 +72,10 @@ app.get('/blogs/:id', async (req, res) => {
     }
 });
 
+
+
 app.post('/blog', (req, res) => {
+    console.log(req);
     postBlog(req.body.title, req.body.content, req.body.author);
 });
 
@@ -92,9 +100,8 @@ async function postBlog(title, content, author) {
 }
 
 async function updateBlog(id, title, content, author) {
-    const result = await rs.post("blogs", "blog", {"blog-title": title, "blog-content": content, "blog-author": author}, rs._ADD_AUTO_INC);
+    const result = await rs.post("blogs", id, {"blog-title": title, "blog-content": content, "blog-author": author});
     console.log(result);
 }
-
 
 app.listen(port, () => console.log(`App listening to port ${port}`));
