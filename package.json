@@ -5,7 +5,7 @@
   "scripts": {
     "scss": "node-sass --watch assets/scss -o assets/css",
     "eslint": "eslint",
-    "test": "jest"
+    "test": "jest --coverage --coverageDirectory=output/coverage/jest"
   },
   "repository": {
     "type": "git",
@@ -36,7 +36,8 @@
   },
   "jest": {
     "coverageReporters": [
-      "text"
+      "text",
+      "cobertura"
     ],
     "reporters": [
       "default",

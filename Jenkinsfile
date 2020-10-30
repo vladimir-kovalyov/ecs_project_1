@@ -41,11 +41,10 @@ pipeline {
                         echo 'this is Unit Testing stage'
                         sh 'npm run test'
                     }
-                }
-
-                stage('UI Testing') {
-                    steps {
-                        echo 'this is UI Testing stage'
+                    post {
+                        always {
+                        step([$class: 'CoberturaPublisher', coberturaReportFile: 'output/coverage/jest/cobertura-coverage.xml'])
+                        }
                     }
                 }
             }
@@ -65,9 +64,9 @@ pipeline {
             steps {
                 echo 'This is e2e stage: cyprus'
                 // Leave ssh
-                sh 'exit'
-                sh './node_modules/.bin/cypress open'
-                sh 'unset DISPLAY && DEBUG=cypress:* npx cypress run'
+                // sh 'exit'
+                // sh './node_modules/.bin/cypress open'
+                // sh 'unset DISPLAY && DEBUG=cypress:* npx cypress run'
             }
         }
             
