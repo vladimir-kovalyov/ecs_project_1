@@ -9,7 +9,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'appIp=$(lsof -Fp :80)'
+                sh 'sudo apt install lsof'
+                sh 'appIp=$(lsof -Fp -i:80)'
                 sh 'kill -9 ${appIp##p}'
                 echo 'This is Build stage' // To be removed later   
                 sh 'rm -f build.tgz' // Removing old archive
