@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'sudo lsof -t -i:80 | sudo xargs kill -9'
+                sh './killme.sh'
                 echo 'This is Build stage' // To be removed later   
                 sh 'rm -f build.tgz' // Removing old archive
                 sh 'npm install' // Installing required modules
