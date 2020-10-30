@@ -78,7 +78,9 @@ pipeline {
             
     }
 
-    def uploadArtifact(server) {
+}
+
+def uploadArtifact(server) {
     def uploadSpec = """{
         "files": [
             {
@@ -92,6 +94,4 @@ pipeline {
     def buildInfo = Artifactory.newBuildInfo()
     server.upload spec: uploadSpec, buildInfo: buildInfo
     server.publishBuildInfo buildInfo
-}
-
 }
