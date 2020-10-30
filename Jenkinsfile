@@ -66,7 +66,7 @@ pipeline {
                 echo 'This is e2e stage: cyprus'
                 // Leave ssh
                 sh 'exit'
-                sh 'npx cypruss run'
+                sh 'npx cypress run'
             }
         }
             
