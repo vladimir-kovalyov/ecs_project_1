@@ -9,8 +9,6 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'sudo chmod +x killme.sh'
-                sh './killme.sh'
                 echo 'This is Build stage' // To be removed later   
                 sh 'rm -f build.tgz' // Removing old archive
                 sh 'npm install' // Installing required modules
