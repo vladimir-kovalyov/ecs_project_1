@@ -30,7 +30,8 @@ pipeline {
                     }
                     post {
                         always {
-                        junit 'output/coverage/junit/junit.xml'
+                        // Warnings Next Generation Plugin
+                        recordIssues enabledForFailure: true, tools: [esLint(pattern: 'eslint.xml')]
                         }
                     }
                 }
@@ -42,7 +43,7 @@ pipeline {
                     }
                     post {
                         always {
-                        step([$class: 'CoberturaPublisher', coberturaReportFile: 'output/coverage/jest/cobertura-coverage.xml'])
+                            step([$class: 'CoberturaPublisher', coberturaReportFile: 'output/coverage/jest/cobertura-coverage.xml'])
                         }
                     }
                 }
@@ -57,6 +58,12 @@ pipeline {
                 transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'tar -xzf build.tgz -C /var/www/html/ && cd /var/www/html/ && BUILD_ID=dontKillMe ./runme.sh', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'build.tgz')], 
                 usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
             }
+            steps {
+                script {
+                    def server = Artifactory.server 'My_Artifactory'
+                    uploadArtifact(server)
+                }
+            }
         }
 
         stage('e2e Test') {
@@ -70,5 +77,21 @@ pipeline {
         }
             
     }
+
+    def uploadArtifact(server) {
+    def uploadSpec = """{
+        "files": [
+            {
+                "pattern": "continuous-test-code-coverage-guide*.tgz",
+                "target": "npm-stable/"
+            }
+        ]
+    }"""
+    server.upload(uploadSpec)
+
+    def buildInfo = Artifactory.newBuildInfo()
+    server.upload spec: uploadSpec, buildInfo: buildInfo
+    server.publishBuildInfo buildInfo
+}
 
 }
