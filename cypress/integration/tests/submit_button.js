@@ -2,7 +2,7 @@
 
 context('Actions', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:8080');
+    cy.visit('http://35.176.156.63');
   });
 
   it('.type() - type into a DOM element', () => {
