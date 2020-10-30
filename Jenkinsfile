@@ -67,7 +67,7 @@ pipeline {
                 // Leave ssh
                 sh 'exit'
                 sh './node_modules/.bin/cypress open'
-                sh 'npx cypress run'
+                sh 'unset DISPLAY && DEBUG=cypress:* npx cypress run'
             }
         }
             
