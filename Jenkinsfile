@@ -60,6 +60,13 @@ pipeline {
                 usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
             }
         }
+
+        stage('e2e Test') {
+            steps {
+                echo 'This is e2e stage: cyprus'
+                sh 'npx cypruss run'
+            }
+        }
             
     }
 
