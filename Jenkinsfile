@@ -9,7 +9,6 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'sudo apt install lsof'
                 sh 'appIp=$(lsof -Fp -i:80)'
                 sh 'kill -9 ${appIp##p}'
                 echo 'This is Build stage' // To be removed later   
