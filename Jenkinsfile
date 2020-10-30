@@ -30,8 +30,7 @@ pipeline {
                     }
                     post {
                         always {
-                        // Warnings Next Generation Plugin
-                        recordIssues enabledForFailure: true, tools: [esLint(pattern: 'eslint.xml')]
+                        junit 'output/coverage/junit/junit.xml'
                         }
                     }
                 }
