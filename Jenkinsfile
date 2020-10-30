@@ -64,6 +64,8 @@ pipeline {
         stage('e2e Test') {
             steps {
                 echo 'This is e2e stage: cyprus'
+                // Leave ssh
+                sh 'exit'
                 sh 'npx cypruss run'
             }
         }
