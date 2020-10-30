@@ -66,7 +66,6 @@ pipeline {
                 echo 'This is e2e stage: cyprus'
                 // Leave ssh
                 sh 'exit'
-                sh 'ifconfig -a'
                 sh './node_modules/.bin/cypress open'
                 sh 'npx cypress run'
             }
