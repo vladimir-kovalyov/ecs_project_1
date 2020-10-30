@@ -1,3 +1,4 @@
 node_modules/
+public/blogfiles/*
 package-lock.json
 project.code-workspace
