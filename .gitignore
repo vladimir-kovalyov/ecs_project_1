@@ -3,3 +3,5 @@ public/blogfiles/*
 package-lock.json
 project.code-workspace
 junit.xml
+/coverage.data
+/coverage/
