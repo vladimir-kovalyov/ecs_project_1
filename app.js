@@ -7,7 +7,7 @@ const fs = require('fs');
 const handlebars = require('express-handlebars');
 
 const app = express();
-const port = 80;
+const port = 8080;
 
 // Clear the database
 rs.delete("blogs", "*");
