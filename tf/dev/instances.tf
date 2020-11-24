@@ -11,13 +11,12 @@ resource "aws_instance" "mike_al_web" {
     subnet_id = aws_subnet.mike_al_VPC_Subnet.id
     vpc_security_group_ids = [ aws_security_group.mike_al_VPC_Security_Group.id ]
     user_data = <<-EOF
-            #! /bin/bash
-            sudo yum -y update
-            sudo yum install -y httpd
+            #!/bin/bash
+            sudo yum -y install httpd
             sudo chmod 777 /var/www/html/
-            sudo echo "Hello Al" > /var/www/html/index.html
-            sudo systemctl start httpd
             sudo systemctl enable httpd
+            sudo systemctl start httpd
+            echo "<h1>Hello Al</h1>" > /var/www/html/index.html
             EOF
 
     tags = {
