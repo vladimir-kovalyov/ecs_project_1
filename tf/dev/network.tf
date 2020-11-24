@@ -1,9 +1,6 @@
 # create the VPC
 resource "aws_vpc" "mike_al_VPC" {
   cidr_block           = var.vpcCIDRblock
-  instance_tenancy     = var.instanceTenancy 
-  enable_dns_support   = var.dnsSupport 
-  enable_dns_hostnames = var.dnsHostNames
 
   tags = {
       Name = "ma-acad-VPC"
@@ -55,55 +52,6 @@ resource "aws_security_group" "mike_al_VPC_Security_Group" {
   tags = {
     Name = "Mike-Al VPC Security Group"
     Description = "Mike-Al VPC Security Group"
-  }
-} # end resource
-
-# create VPC Network access control list
-resource "aws_network_acl" "mike_al_VPC_Security_ACL" {
-  vpc_id = aws_vpc.mike_al_VPC.id
-  subnet_ids = [ aws_subnet.mike_al_VPC_Subnet.id ]
-# allow ingress port 22
-  ingress {
-    protocol   = "tcp"
-    rule_no    = 100
-    action     = "allow"
-    cidr_block = var.destinationCIDRblock 
-    from_port  = 22
-    to_port    = 22
-  }
-  
-  # allow ingress port 80 
-  ingress {
-    protocol   = "tcp"
-    rule_no    = 200
-    action     = "allow"
-    cidr_block = var.destinationCIDRblock 
-    from_port  = 80
-    to_port    = 80
-  }
-  
-  # allow egress port 22 
-  egress {
-    protocol   = "tcp"
-    rule_no    = 100
-    action     = "allow"
-    cidr_block = var.destinationCIDRblock
-    from_port  = 22 
-    to_port    = 22
-  }
-  
-  # allow egress port 80 
-  egress {
-    protocol   = "tcp"
-    rule_no    = 200
-    action     = "allow"
-    cidr_block = var.destinationCIDRblock
-    from_port  = 80  
-    to_port    = 80 
-  }
-
-  tags = {
-      Name = "mike-al-nacl"
   }
 } # end resource
 
