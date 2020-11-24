@@ -2,6 +2,13 @@ variable "region" {
     default = "eu-west-1"
 }
 
+variable "ami" {
+    default = "ami-014ce76919b528bff"
+}
+variable "instance_type" {
+    default = "t2.micro"
+}
+
 variable "instanceTenancy" {
     default = "default"
 }
