@@ -57,3 +57,89 @@ resource "aws_security_group" "mike_al_VPC_Security_Group" {
     Description = "Mike-Al VPC Security Group"
   }
 } # end resource
+
+# create VPC Network access control list
+resource "aws_network_acl" "mike_al_VPC_Security_ACL" {
+  vpc_id = aws_vpc.mike_al_VPC.id
+  subnet_ids = [ aws_subnet.mike_al_VPC_Subnet.id ]
+# allow ingress port 22
+  ingress {
+    protocol   = "tcp"
+    rule_no    = 100
+    action     = "allow"
+    cidr_block = var.destinationCIDRblock 
+    from_port  = 22
+    to_port    = 22
+  }
+  
+  # allow ingress port 80 
+  ingress {
+    protocol   = "tcp"
+    rule_no    = 200
+    action     = "allow"
+    cidr_block = var.destinationCIDRblock 
+    from_port  = 80
+    to_port    = 80
+  }
+  
+  # allow egress port 22 
+  egress {
+    protocol   = "tcp"
+    rule_no    = 100
+    action     = "allow"
+    cidr_block = var.destinationCIDRblock
+    from_port  = 22 
+    to_port    = 22
+  }
+  
+  # allow egress port 80 
+  egress {
+    protocol   = "tcp"
+    rule_no    = 200
+    action     = "allow"
+    cidr_block = var.destinationCIDRblock
+    from_port  = 80  
+    to_port    = 80 
+  }
+
+  tags = {
+      Name = "mike-al-nacl"
+  }
+} # end resource
+
+# Create the Internet Gateway
+resource "aws_internet_gateway" "mike_al_VPC_GW" {
+ vpc_id = aws_vpc.mike_al_VPC.id
+ tags = {
+    Name = "Mike-Al VPC Internet Gateway"
+ }
+} # end resource
+
+# Create the Route Table
+resource "aws_route_table" "mike_al_VPC_route_table" {
+ vpc_id = aws_vpc.mike_al_VPC.id
+ tags = {
+    Name = "Mike-Al VPC Route Table"
+ }
+} # end resource
+
+# Create the Internet Access
+resource "aws_route" "mike_al_VPC_internet_access" {
+  route_table_id         = aws_route_table.mike_al_VPC_route_table.id
+  destination_cidr_block = var.destinationCIDRblock
+  gateway_id             = aws_internet_gateway.mike_al_VPC_GW.id
+} # end resource
+
+# Associate the Route Table with the Subnet
+resource "aws_route_table_association" "mike_al_VPC_association" {
+  subnet_id      = aws_subnet.mike_al_VPC_Subnet.id
+  route_table_id = aws_route_table.mike_al_VPC_route_table.id
+} # end resource
+
+output "subnet_id" {
+    value = aws_subnet.mike_al_VPC_Subnet.id
+}
+
+output "vpc_security_group_id" {
+    value = aws_security_group.mike_al_VPC_Security_Group.id
+}
