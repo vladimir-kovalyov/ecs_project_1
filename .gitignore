@@ -1,8 +1,29 @@
 node_modules/
-**/DS_Store/*
 public/blogfiles/*
 package-lock.json
 project.code-workspace
 junit.xml
 /coverage.data
 /coverage/
+# Compiled files
+*.tfstate
+*.tfstate.backup
+*.tfstate.lock.info
+# logs
+*.log
+# Directories
+**/.terraform/*
+**/.vagrant/*
+# secret variables
+terraform.tfvars
+.terraformrc
+# SSH Keys
+*.pem
+# Backup files
+*.bak
+# Ignored Terraform files
+*gitignore*.tf
+# Ignore Mac .DS_Store files
+.DS_Store
+# Ignored vscode files
+.vscode/
