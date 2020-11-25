@@ -1,4 +1,4 @@
-resource "aws_launch_configuration" "mike_al_launch_config" {
+/* resource "aws_launch_configuration" "mike_al_launch_config" {
   name_prefix                 = "mike_al_cluster"
   image_id                    = var.ami
   instance_type               = var.instance_type
@@ -85,7 +85,7 @@ resource "aws_security_group_rule" "allow_egress_all" {
   protocol          = "-1"
   cidr_blocks = [
   "0.0.0.0/0"]
-}
+} */
 
 /* resource "aws_instance" "mike_al_web" {
     ami = var.ami
