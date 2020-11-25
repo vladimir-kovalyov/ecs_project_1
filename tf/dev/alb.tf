@@ -41,7 +41,7 @@ resource "aws_lb_target_group" "mike_al_alb_tg" {
 
   health_check {
     matcher = "200,301,302"
-    path = "index.html"
+    path = "/"
   }
 }
 
