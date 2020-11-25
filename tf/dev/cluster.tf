@@ -16,14 +16,22 @@ resource "aws_ecs_task_definition" "mike_al_task" {
           "hostPort": 80
         }
       ],
-      "memory": 512,
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "mike-al-cw",
+          "awslogs-region": "${var.region}",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
+      "memory": 1024,
       "cpu": 256
     }
   ]
   DEFINITION
   requires_compatibilities = ["FARGATE"]
-  network_mode             = "awsvpc" 
-  memory                   = 512
+  network_mode             = "awsvpc"
+  memory                   = 1024
   cpu                      = 256
   execution_role_arn       = aws_iam_role.mikeAlEcsTaskExecutionRole.arn
 }
@@ -33,7 +41,7 @@ resource "aws_ecs_service" "mike_al_service" {
   cluster         = aws_ecs_cluster.mike_al_cluster.id
   task_definition = aws_ecs_task_definition.mike_al_task.arn
   launch_type     = "FARGATE"
-  desired_count   = 1
+  desired_count   = 2
 
   load_balancer {
     target_group_arn = aws_lb_target_group.mike_al_alb_tg.arn # Referencing our target group
