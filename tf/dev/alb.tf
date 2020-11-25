@@ -1,15 +1,18 @@
 resource "aws_alb" "mike_al_alb" {
-  name               = "mike-al-lb-tf"
+  name               = "mike-al-alb"
   load_balancer_type = "application"
   subnets = [
-    aws_default_subnet.mike_al_VPC_Subnet.id
+    aws_subnet.mike_al_VPC_SubnetOne.id,
+    aws_subnet.mike_al_VPC_SubnetTwo.id,
   ]
-  # Referencing the security group
-  security_groups = [aws_security_group.mike_al_elb_sg.id]
+  security_groups = [aws_security_group.mike_al_alb_sg.id]
 }
 
 # Creating a security group for the load balancer
-resource "aws_security_group" "mike_al_elb_sg" {
+resource "aws_security_group" "mike_al_alb_sg" {
+  vpc_id = aws_vpc.mike_al_VPC.id
+  name   = "mike-al-alb-sg"
+
   ingress {
     from_port   = 80
     to_port     = 80
@@ -31,6 +34,11 @@ resource "aws_lb_target_group" "mike_al_alb_tg" {
   protocol    = "HTTP"
   target_type = "ip"
   vpc_id      = aws_vpc.mike_al_VPC.id
+
+  depends_on = [
+    aws_alb.mike_al_alb
+  ]
+
   health_check {
     matcher = "200,301,302"
     path = "/"
