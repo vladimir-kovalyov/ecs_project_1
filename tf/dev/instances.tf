@@ -1,4 +1,4 @@
-resource "aws_instance" "mike_al_web" {
+/* resource "aws_instance" "mike_al_web" {
     ami = var.ami
     instance_type = var.instance_type
     key_name = "mike-al-keypair"
@@ -30,4 +30,4 @@ output "public_ip" {
 
 output "public_dns" {
   value = aws_instance.mike_al_web.public_dns
-}
+} */
