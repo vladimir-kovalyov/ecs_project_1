@@ -1,14 +1,12 @@
 variable "region" {
     default = "eu-west-1"
 }
-
 variable "ami" {
     default = "ami-014ce76919b528bff"
 }
 variable "instance_type" {
     default = "t2.micro"
 }
-
 variable "vpcCIDRblock" {
     default = "10.0.0.0/16"
 }
@@ -32,11 +30,9 @@ variable "egressCIDRblock" {
 variable "mapPublicIP" {
     default = true
 }
-
 variable "availabilityZoneOne" {
     default = "eu-west-1a"
 }
-
 variable "availabilityZoneTwo" {
     default = "eu-west-1b"
 }

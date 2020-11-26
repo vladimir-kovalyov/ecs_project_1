@@ -2,38 +2,26 @@ resource "aws_ecs_cluster" "mike_al_cluster" {
   name = "mike-al-cluster"
 }
 
+data "template_file" "task_template" {
+  template = file("task-definition.json")
+
+  vars = {
+    cw_group = aws_cloudwatch_log_group.mike_al_cw.name
+    aws_region = var.region
+  }
+}
+
 resource "aws_ecs_task_definition" "mike_al_task" {
-  family                   = "worker" # Naming our first task
-  container_definitions    = <<DEFINITION
-  [
-    {
-      "name": "worker",
-      "image": "603825719481.dkr.ecr.eu-west-1.amazonaws.com/acad-proj2-al-michael:prod-latest",
-      "essential": true,
-      "portMappings": [
-        {
-          "containerPort": 80,
-          "hostPort": 0
-        }
-      ],
-      "logConfiguration": {
-        "logDriver": "awslogs",
-        "options": {
-          "awslogs-group": "${aws_cloudwatch_log_group.mike_al_cw.name}",
-          "awslogs-region": "${var.region}",
-          "awslogs-stream-prefix": "ecs"
-        }
-      },
-      "memory": 1024,
-      "cpu": 256
-    }
+  family                = "worker"
+  container_definitions = data.template_file.task_template.rendered
+  
+  requires_compatibilities = [
+    "FARGATE"
   ]
-  DEFINITION
-  requires_compatibilities = ["FARGATE"]
-  network_mode             = "awsvpc"
-  memory                   = 1024
-  cpu                      = 512
-  execution_role_arn       = aws_iam_role.mikeAlEcsTaskExecutionRole.arn
+  cpu = 512
+  memory = 1024
+  network_mode = "awsvpc"
+  execution_role_arn = aws_iam_role.mikeAlEcsTaskExecutionRole.arn
 }
 
 resource "aws_ecs_service" "mike_al_service" {
