@@ -5,7 +5,7 @@ o=blogfiles/
 
 cd $o
 
-myarr=($(awk -F':' '{ print $0 }' "../$input" | sed -ne '/.txt$/p' -e '/.doc$/p' -e '/.md$/p'))
+myarr=($(awk -F':' '{ print $0 }' "$input" | sed -ne '/.txt$/p' -e '/.doc$/p' -e '/.md$/p'))
 
 for i in "${myarr[@]}"
 do

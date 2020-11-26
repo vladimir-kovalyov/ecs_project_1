@@ -1,18 +1,19 @@
 {
-  "name": "ecs_project_1",
+  "name": "ecs_project_2",
   "description": "Simple blog web application that serves ECS content.",
   "version": "1.0.0",
   "scripts": {
     "scss": "node-sass --watch assets/scss -o assets/css",
     "eslint": "eslint",
-    "test": "jest --coverage --coverageDirectory=output/coverage/jest --no-cache --detectOpenHandles --runInBand --forceExit"
+    "test": "jest --coverage --coverageDirectory=output/coverage/jest --no-cache --detectOpenHandles --runInBand --forceExit",
+    "start": "node ./app.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/vladimir-kovalyov/ecs_project_1.git"
+    "url": "https://github.com/MichaelECS/ecs_project_2"
   },
   "keywords": [],
-  "author": "Vladimir Kovalyov, Michael David Skidmore",
+  "author": "Alastair Sumner, Michael David Skidmore",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
