@@ -40,6 +40,13 @@ resource "aws_security_group" "mike_al_VPC_Security_Group" {
   name        = "Mike-Al VPC Security Group"
   description = "Mike-Al VPC Security Group"
 
+  ingress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = -1
+    security_groups = [aws_security_group.mike_al_alb_sg.id]
+  }
+
   # allow ingress of port 22
   ingress {
     from_port   = 22
@@ -55,7 +62,7 @@ resource "aws_security_group" "mike_al_VPC_Security_Group" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  #   allow ingress of port 80
+  # allow ingress of port 80
   ingress {
     from_port   = 80
     to_port     = 80

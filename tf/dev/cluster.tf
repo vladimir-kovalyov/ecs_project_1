@@ -13,7 +13,7 @@ resource "aws_ecs_task_definition" "mike_al_task" {
       "portMappings": [
         {
           "containerPort": 80,
-          "hostPort": 80
+          "hostPort": 0
         }
       ],
       "logConfiguration": {
@@ -55,6 +55,7 @@ resource "aws_ecs_service" "mike_al_service" {
       aws_subnet.mike_al_VPC_SubnetTwo.id
     ]
     assign_public_ip = true # Providing our containers with public IPs
+    security_groups = [aws_security_group.mike_al_service_sg.id]
   }
 }
 
@@ -65,14 +66,14 @@ resource "aws_security_group" "mike_al_service_sg" {
   ingress {
     from_port       = 0
     to_port         = 0
-    protocol        = "-1"
+    protocol        = -1
     security_groups = [aws_security_group.mike_al_alb_sg.id]
   }
 
   egress {
     from_port   = 0
     to_port     = 0
-    protocol    = "-1"
+    protocol    = -1
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
