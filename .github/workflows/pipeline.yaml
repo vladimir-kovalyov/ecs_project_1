@@ -6,8 +6,6 @@ jobs:
     name: Upload to Amazon ECR - 2nd Version
     runs-on: ubuntu-latest
     steps:
-      env:
-        TF_DIR: /dev/tf
       - name: Checkout
         uses: actions/checkout@v2
       - name: Configure AWS credentials
@@ -32,6 +30,8 @@ jobs:
         with:
           # terraform_version: 0.13.0
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+      - name: Terraform Set Environment
+        run: echo "::set-env name=TF_DIR::/dev/tf"
       - name: Terraform Format
         id: fmt
         run: terraform fmt -check
