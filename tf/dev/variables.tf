@@ -8,7 +8,7 @@ variable "ami" {
 }
 variable "instance_type" {
     type = string
-    efault = "t2.micro"
+    default = "t2.micro"
 }
 variable "vpcCIDRblock" {
     type = string
