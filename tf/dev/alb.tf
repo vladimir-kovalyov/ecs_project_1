@@ -30,7 +30,7 @@ resource "aws_security_group" "mike_al_alb_sg" {
 
 resource "aws_lb_target_group" "mike_al_alb_tg" {
   name        = "mike-al-alb-tg"
-  port        = 80
+  port        = var.container-port
   protocol    = "HTTP"
   target_type = "ip"
   vpc_id      = aws_vpc.mike_al_VPC.id
