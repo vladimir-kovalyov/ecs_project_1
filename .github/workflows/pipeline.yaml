@@ -6,6 +6,8 @@ jobs:
     name: Upload to Amazon ECR - 2nd Version
     runs-on: ubuntu-latest
     steps:
+      env:
+        TF_DIR: /dev/tf
       - name: Checkout
         uses: actions/checkout@v2
       - name: Configure AWS credentials
@@ -26,8 +28,6 @@ jobs:
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
       - name: Setup Terraform
-        env:
-          TF_DIR: /dev/tf
         uses: hashicorp/setup-terraform@v1
         with:
           # terraform_version: 0.13.0
